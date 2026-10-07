@@ -1,2 +1,6 @@
+#!/bin/sh
+
+cd toy-shop
+
 npm run lint
 npm run format
