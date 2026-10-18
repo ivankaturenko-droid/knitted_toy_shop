@@ -2,10 +2,12 @@ import { BrowserRouter } from 'react-router-dom';
 import ProductCard from './ProductCard.jsx';
 
 describe('ProductCard', () => {
-  it('показує назву, опис, ціну та посилання на деталі', () => {
+  it('показує товар, відкриває деталі та додає його до кошика', () => {
+    const addToCart = cy.stub().as('addToCart');
     cy.mount(
       <BrowserRouter>
         <ProductCard
+          onAddToCart={addToCart}
           product={{
             id: 'spider',
             name: 'Павук Спідер',
@@ -25,5 +27,8 @@ describe('ProductCard', () => {
       'href',
       '/product/spider'
     );
+    cy.contains('button', 'Додати в кошик').click();
+    cy.contains('button', 'Додано в кошик').should('be.visible');
+    cy.get('@addToCart').should('have.been.calledOnce');
   });
 });

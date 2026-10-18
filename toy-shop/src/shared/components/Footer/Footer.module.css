@@ -1,0 +1,216 @@
+.footer {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  width: 100%;
+  min-height: 230px;
+  margin-top: auto;
+  padding: 2.25rem 0 1.5rem;
+  background-color: #698270;
+  background-image:
+    url('/homepage/images/%D0%BF%D0%BE%D0%BB%D1%83%D0%BD%D0%B8%D1%86%D1%8F%201.png'),
+    url('/homepage/images/%D0%BF%D0%BE%D0%BB%D1%83%D0%BD%D0%B8%D1%86%D1%8F%202.png'),
+    url('/homepage/images/%D0%BF%D0%BE%D0%BB%D1%83%D0%BD%D0%B8%D1%86%D1%8F%206.png'),
+    url('/homepage/images/%D0%BF%D0%BE%D0%BB%D1%83%D0%BD%D0%B8%D1%86%D1%8F%204.png'),
+    url('/homepage/images/%D0%BF%D0%BE%D0%BB%D1%83%D0%BD%D0%B8%D1%86%D1%8F%202.png'),
+    url('/homepage/images/%D0%BF%D0%BE%D0%BB%D1%83%D0%BD%D0%B8%D1%86%D1%8F%201.png');
+  background-position:
+    30% 100%,
+    43% 100%,
+    56% 0%,
+    70% 100%,
+    82% 0%,
+    98% 0%;
+  background-size:
+    auto 96px,
+    auto 84px,
+    auto 130px,
+    auto 92px,
+    auto 88px,
+    auto 150px;
+  background-repeat: no-repeat;
+  color: #d3e3d6;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 300' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0 34C180 0 330 4 480 24s300 28 480-2 300-20 480 2v276H0z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 300' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0 34C180 0 330 4 480 24s300 28 480-2 300-20 480 2v276H0z'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.container {
+  width: 100%;
+  max-width: 1288px;
+  margin: 0 auto;
+  padding-inline: 24px;
+}
+
+.footerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: clamp(40px, 6vw, 100px);
+}
+
+.footerNav {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: clamp(48px, 6vw, 100px);
+}
+
+.logo {
+  display: block;
+  width: clamp(110px, 8vw, 145px);
+  height: auto;
+}
+
+.navList,
+.contacts ul {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navLink,
+.contactLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  font-size: clamp(16px, 1.8vw, 28px);
+  text-decoration: none;
+  text-underline-offset: 0.22em;
+  white-space: nowrap;
+  transition: color 180ms ease;
+}
+
+.navLink {
+  color: #d3e3d6;
+}
+
+.contactLink {
+  color: #461111;
+}
+
+.contactLink svg {
+  width: 1.25em;
+  height: 1.25em;
+  margin-right: 0.55em;
+  flex: 0 0 auto;
+}
+
+.navLink:hover,
+.contactLink:hover {
+  color: #f8e5e5;
+}
+
+.navLink:focus-visible,
+.contactLink:focus-visible,
+.footerContainer > nav > a:focus-visible {
+  border-radius: 2px;
+  outline: 3px solid #f3c7c7;
+  outline-offset: 3px;
+}
+
+.contacts {
+  position: relative;
+  z-index: 1;
+  font-style: normal;
+}
+
+@media (max-width: 900px) {
+  .footer {
+    background-image:
+      url('/homepage/images/%D0%BF%D0%BE%D0%BB%D1%83%D0%BD%D0%B8%D1%86%D1%8F%201.png'),
+      url('/homepage/images/%D0%BF%D0%BE%D0%BB%D1%83%D0%BD%D0%B8%D1%86%D1%8F%202.png');
+    background-position:
+      8px 12px,
+      calc(100% - 8px) 12px;
+    background-size: auto 50px;
+  }
+
+  .footerContainer {
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .footerNav {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .navList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    background-image:
+      url('/homepage/images/%D0%BF%D0%BE%D0%BB%D1%83%D0%BD%D0%B8%D1%86%D1%8F%201.png'),
+      url('/homepage/images/%D0%BF%D0%BE%D0%BB%D1%83%D0%BD%D0%B8%D1%86%D1%8F%202.png');
+    background-position:
+      8px 12px,
+      calc(100% - 8px) 12px;
+    background-size: auto 50px;
+  }
+
+  .footerContainer {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-block: 1rem;
+    text-align: center;
+  }
+
+  .container {
+    padding-inline: 18px;
+  }
+
+  .footerNav {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .navList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem 1rem;
+  }
+
+  .logo {
+    width: 88px;
+  }
+
+  .navLink,
+  .contactLink {
+    min-height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .footer::before,
+  .footer::after {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .container {
+    padding-inline: 12px;
+  }
+
+  .navLink,
+  .contactLink {
+    white-space: normal;
+  }
+}

@@ -1,0 +1,206 @@
+.page {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: min(690px, 76vh);
+  place-items: center;
+  padding: 2rem 1rem;
+  overflow: hidden;
+}
+
+.page:not(.modalPage) {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+.modalPage {
+  min-height: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.modalPage .card {
+  padding: 1rem;
+}
+
+.modalPage .form {
+  gap: 0.55rem;
+  padding: 1rem;
+}
+
+.modalPage .form label {
+  gap: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.modalPage .form input {
+  min-height: 2.3rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.modalPage .heading h1 {
+  font-size: clamp(1.45rem, 4vw, 1.8rem);
+}
+
+.modalPage .heading p {
+  font-size: 0.8rem;
+}
+
+.modalPage .submit {
+  min-height: 2.45rem;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 520px);
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border-radius: 1.7rem;
+  background: #a1bda8;
+}
+
+.closeButton {
+  position: absolute;
+  z-index: 2;
+  top: 0.5rem;
+  right: 0.65rem;
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f5e2e2;
+  color: #461111;
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  background: #f3c7c7;
+}
+
+.form {
+  display: grid;
+  gap: 0.95rem;
+  padding: clamp(1.2rem, 4vw, 2rem);
+  border-radius: 1.25rem;
+  background: #f5e2e2;
+}
+
+.heading {
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+.heading h1 {
+  margin: 0;
+  color: #461111;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+}
+
+.heading p {
+  margin: 0.35rem 0 0;
+  color: #718675;
+  font-size: 0.9rem;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 0.15rem;
+}
+
+.error {
+  margin: 0;
+  color: #9b3030;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.switchMode {
+  margin: 0;
+  color: #526d59;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.berry {
+  position: absolute;
+  z-index: 0;
+  width: 100px;
+  aspect-ratio: 1;
+  background: url('/homepage/images/полуниця%201.png') center / contain
+    no-repeat;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.berryLeft {
+  bottom: 14%;
+  left: calc(50% - 370px);
+  transform: rotate(-18deg);
+}
+
+.berryRight {
+  top: 14%;
+  right: calc(50% - 370px);
+  width: 112px;
+  transform: rotate(15deg);
+}
+
+.modalPage .berryLeft {
+  left: -28px;
+}
+
+.modalPage .berryRight {
+  right: -28px;
+  width: 76px;
+}
+
+@media (max-width: 760px) {
+  .berry {
+    width: 68px;
+  }
+
+  .berryLeft {
+    left: max(0px, calc(50% - 310px));
+  }
+
+  .berryRight {
+    right: max(0px, calc(50% - 310px));
+    width: 76px;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    min-height: auto;
+    padding: 1rem 0;
+  }
+
+  .berry {
+    width: 56px;
+    opacity: 0.35;
+  }
+
+  .berryLeft {
+    left: max(0px, calc(50% - 275px));
+  }
+
+  .berryRight {
+    right: max(0px, calc(50% - 275px));
+    width: 62px;
+  }
+
+  .modalPage .berryLeft {
+    left: -16px;
+  }
+
+  .modalPage .berryRight {
+    right: -16px;
+    width: 58px;
+  }
+}

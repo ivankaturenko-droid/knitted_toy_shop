@@ -1,0 +1,29 @@
+.field {
+  display: grid;
+  gap: 0.4rem;
+  color: #461111;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.field input {
+  width: 100%;
+  min-height: 2.7rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: 0.9rem;
+  background: #fff;
+  color: #461111;
+  font: inherit;
+  font-weight: 400;
+}
+
+.field input:focus-visible {
+  border-color: #698270;
+  outline: 3px solid rgb(105 130 112 / 25%);
+  outline-offset: 1px;
+}
+
+.field input::placeholder {
+  color: #9c8b8b;
+}

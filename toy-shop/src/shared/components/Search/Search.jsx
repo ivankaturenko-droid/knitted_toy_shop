@@ -1,13 +1,21 @@
-export default function Search({ value, onChange }) {
+import styles from './Search.module.css';
+
+export default function Search({
+  label = 'Що вас цікавить?',
+  className = '',
+  onChange,
+  placeholder = 'Що вас цікавить?',
+  value,
+}) {
   return (
-    <label className="product-search">
-      <span className="visually-hidden">Пошук товарів</span>
+    <label className={`${styles.search} ${className}`.trim()}>
+      <span className={styles.visuallyHidden}>{label}</span>
       <input
-        className="search-input"
+        className={styles.input}
+        onChange={onChange}
+        placeholder={placeholder}
         type="search"
         value={value}
-        onChange={(event) => onChange(event.target.value)}
-        placeholder="Знайти іграшку..."
       />
     </label>
   );
