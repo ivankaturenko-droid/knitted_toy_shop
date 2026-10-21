@@ -151,7 +151,7 @@ export default function AuthPage({ mode, isModal = false, onClose }) {
           </Button>
           <p className={styles.switchMode}>
             {isRegistration ? 'Вже маєте акаунт?' : 'Ще не маєте акаунта?'}{' '}
-            <Link to={isRegistration ? '/login' : '/registration'}>
+            <Link to={isRegistration ? '/login' : '/register'}>
               {isRegistration ? 'Увійти' : 'Зареєструватися'}
             </Link>
           </p>

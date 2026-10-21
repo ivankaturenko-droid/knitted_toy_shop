@@ -47,12 +47,12 @@ export default function Header({ cartCount, isHome }) {
             </Link>
             <ul className={listClass}>
               <li>
-                <a
+                <Link
                   className={navLinkClass('/')}
-                  href={isHome ? '#my_toys' : '/#my_toys'}
+                  to={isHome ? '#my_toys' : '/#my_toys'}
                 >
                   Мої іграшки
-                </a>
+                </Link>
               </li>
               <li>
                 <Link className={navLinkClass('/catalog')} to="/catalog">
@@ -60,28 +60,30 @@ export default function Header({ cartCount, isHome }) {
                 </Link>
               </li>
               <li>
-                <Link
-                  className={navLinkClass('/registration')}
-                  to="/registration"
-                >
+                <Link className={navLinkClass('/register')} to="/register">
                   Реєстрація
                 </Link>
               </li>
               <li>
-                <a
-                  className={navLinkClass('/')}
-                  href={isHome ? '#about_me' : '/#about_me'}
-                >
-                  Про мене
-                </a>
+                <Link className={navLinkClass('/login')} to="/login">
+                  Увійти
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   className={navLinkClass('/')}
-                  href={isHome ? '#contacts' : '/#contacts'}
+                  to={isHome ? '#about_me' : '/#about_me'}
+                >
+                  Про мене
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={navLinkClass('/')}
+                  to={isHome ? '#contacts' : '/#contacts'}
                 >
                   Контакти
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
