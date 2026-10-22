@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from '../features/auth/hooks/useAuth.js';
 import { CartProvider, useCart } from '../features/cart/hooks/useCart.js';
@@ -13,6 +13,28 @@ function AppContent() {
   const auth = useAuth();
   const location = useLocation();
   const isHome = location.pathname === '/';
+
+  useEffect(() => {
+    if (!isHome || !location.hash) return undefined;
+
+    let attempts = 0;
+    let frameId;
+    const scrollToSection = () => {
+      const section = document.getElementById(
+        decodeURIComponent(location.hash.slice(1))
+      );
+
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      } else if (attempts < 10) {
+        attempts += 1;
+        frameId = window.requestAnimationFrame(scrollToSection);
+      }
+    };
+
+    frameId = window.requestAnimationFrame(scrollToSection);
+    return () => window.cancelAnimationFrame(frameId);
+  }, [isHome, location.hash]);
   const [showWelcomeAuth, setShowWelcomeAuth] = useState(
     () =>
       location.pathname === '/' &&

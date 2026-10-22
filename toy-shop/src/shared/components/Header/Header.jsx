@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import HomeSectionLink from '../HomeSectionLink.jsx';
 import styles from './Header.module.css';
 
 function BasketIcon() {
@@ -47,12 +48,12 @@ export default function Header({ cartCount, isHome }) {
             </Link>
             <ul className={listClass}>
               <li>
-                <Link
+                <HomeSectionLink
                   className={navLinkClass('/')}
-                  to={isHome ? '#my_toys' : '/#my_toys'}
+                  sectionId="my_products"
                 >
                   Мої іграшки
-                </Link>
+                </HomeSectionLink>
               </li>
               <li>
                 <Link className={navLinkClass('/catalog')} to="/catalog">
@@ -70,20 +71,20 @@ export default function Header({ cartCount, isHome }) {
                 </Link>
               </li>
               <li>
-                <Link
+                <HomeSectionLink
                   className={navLinkClass('/')}
-                  to={isHome ? '#about_me' : '/#about_me'}
+                  sectionId="about_me"
                 >
                   Про мене
-                </Link>
+                </HomeSectionLink>
               </li>
               <li>
-                <Link
+                <HomeSectionLink
                   className={navLinkClass('/')}
-                  to={isHome ? '#contacts' : '/#contacts'}
+                  sectionId="contacts"
                 >
                   Контакти
-                </Link>
+                </HomeSectionLink>
               </li>
             </ul>
           </nav>
