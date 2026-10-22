@@ -1,13 +1,8 @@
 import CartItem from './CartItem.jsx';
 
-export default function CartList({
-  items,
-  onQuantityChange,
-  onRemove,
-  className = '',
-}) {
+export default function CartList({ items, onQuantityChange, onRemove }) {
   return (
-    <ul className={`cart-list ${className}`.trim()}>
+    <ul className="cart-list">
       {items.map((item) => (
         <CartItem
           item={item}

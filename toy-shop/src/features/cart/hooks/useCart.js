@@ -18,8 +18,7 @@ export function CartProvider({ children }) {
       items,
       total: getCartTotal(items),
       itemCount: getCartItemCount(items),
-      addToCart: (product, quantity = 1) =>
-        setItems(addItem(items, product, quantity)),
+      addToCart: (product) => setItems(addItem(items, product)),
       setQuantity: (id, quantity) =>
         setItems(updateQuantity(items, id, Number(quantity))),
       removeFromCart: (id) => setItems(items.filter((item) => item.id !== id)),
