@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
+import HomeSectionLink from '../HomeSectionLink.jsx';
 import styles from './Footer.module.css';
 
-export default function Footer({ isHome }) {
+export default function Footer() {
   return (
     <footer className={styles.footer} id="contacts">
       <div className={styles.container}>
@@ -21,28 +22,28 @@ export default function Footer({ isHome }) {
                 </Link>
               </li>
               <li>
-                <a
+                <HomeSectionLink
                   className={styles.navLink}
-                  href={isHome ? '#about_me' : '/#about_me'}
+                  sectionId="about_me"
                 >
                   Про мене
-                </a>
+                </HomeSectionLink>
               </li>
               <li>
-                <a
+                <HomeSectionLink
                   className={styles.navLink}
-                  href={isHome ? '#my_toys' : '/#my_toys'}
+                  sectionId="my_products"
                 >
                   Мої іграшки
-                </a>
+                </HomeSectionLink>
               </li>
               <li>
-                <a
+                <HomeSectionLink
                   className={styles.navLink}
-                  href={isHome ? '#contacts' : '/#contacts'}
+                  sectionId="contacts"
                 >
                   Контакти
-                </a>
+                </HomeSectionLink>
               </li>
             </ul>
           </nav>

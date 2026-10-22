@@ -16,10 +16,10 @@ export default function AppRoutes() {
       <Routes location={backgroundLocation || location}>
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
-        <Route path="/product/:id?" element={<Product />} />
+        <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/registration" element={<Registration />} />
+        <Route path="/register" element={<Registration />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route
           path="*"
@@ -28,7 +28,7 @@ export default function AppRoutes() {
       </Routes>
       {backgroundLocation && (
         <Routes>
-          <Route path="/product/:id?" element={<Product isModal />} />
+          <Route path="/product/:id" element={<Product isModal />} />
         </Routes>
       )}
     </>

@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import HomeSectionLink from '../HomeSectionLink.jsx';
 import styles from './Header.module.css';
 
 function BasketIcon() {
@@ -47,12 +48,12 @@ export default function Header({ cartCount, isHome }) {
             </Link>
             <ul className={listClass}>
               <li>
-                <a
+                <HomeSectionLink
                   className={navLinkClass('/')}
-                  href={isHome ? '#my_toys' : '/#my_toys'}
+                  sectionId="my_products"
                 >
                   Мої іграшки
-                </a>
+                </HomeSectionLink>
               </li>
               <li>
                 <Link className={navLinkClass('/catalog')} to="/catalog">
@@ -60,28 +61,30 @@ export default function Header({ cartCount, isHome }) {
                 </Link>
               </li>
               <li>
-                <Link
-                  className={navLinkClass('/registration')}
-                  to="/registration"
-                >
+                <Link className={navLinkClass('/register')} to="/register">
                   Реєстрація
                 </Link>
               </li>
               <li>
-                <a
-                  className={navLinkClass('/')}
-                  href={isHome ? '#about_me' : '/#about_me'}
-                >
-                  Про мене
-                </a>
+                <Link className={navLinkClass('/login')} to="/login">
+                  Увійти
+                </Link>
               </li>
               <li>
-                <a
+                <HomeSectionLink
                   className={navLinkClass('/')}
-                  href={isHome ? '#contacts' : '/#contacts'}
+                  sectionId="about_me"
+                >
+                  Про мене
+                </HomeSectionLink>
+              </li>
+              <li>
+                <HomeSectionLink
+                  className={navLinkClass('/')}
+                  sectionId="contacts"
                 >
                   Контакти
-                </a>
+                </HomeSectionLink>
               </li>
             </ul>
           </nav>
