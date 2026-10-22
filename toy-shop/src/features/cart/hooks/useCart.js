@@ -25,7 +25,7 @@ export function CartProvider({ children }) {
       removeFromCart: (id) => setItems(items.filter((item) => item.id !== id)),
       clearCart: () => setItems([]),
     }),
-    [items]
+    [items, setItems]
   );
 
   return createElement(CartContext.Provider, { value }, children);
