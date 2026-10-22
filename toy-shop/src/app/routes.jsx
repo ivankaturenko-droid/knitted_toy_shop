@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from '../pages/Home/Home.jsx';
 import Catalog from '../pages/Catalog/Catalog.jsx';
 import Product from '../pages/Product/Product.jsx';
@@ -8,19 +8,29 @@ import Registration from '../pages/Registration/Registration.jsx';
 import Checkout from '../pages/Checkout/Checkout.jsx';
 
 export default function AppRoutes() {
+  const location = useLocation();
+  const backgroundLocation = location.state?.backgroundLocation;
+
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/catalog" element={<Catalog />} />
-      <Route path="/product/:id?" element={<Product />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/registration" element={<Registration />} />
-      <Route path="/checkout" element={<Checkout />} />
-      <Route
-        path="*"
-        element={<p className="notice">Сторінку не знайдено.</p>}
-      />
-    </Routes>
+    <>
+      <Routes location={backgroundLocation || location}>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/product/:id?" element={<Product />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route
+          path="*"
+          element={<p className="notice">Сторінку не знайдено.</p>}
+        />
+      </Routes>
+      {backgroundLocation && (
+        <Routes>
+          <Route path="/product/:id?" element={<Product isModal />} />
+        </Routes>
+      )}
+    </>
   );
 }

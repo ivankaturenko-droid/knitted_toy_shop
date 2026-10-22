@@ -1,0 +1,148 @@
+.card {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  flex-direction: column;
+  padding: clamp(0.7rem, 1.4vw, 1rem);
+  border: 1px solid rgb(70 17 17 / 9%);
+  border-radius: 1.15rem;
+  background: #fffdfc;
+  box-shadow: 0 5px 16px rgb(70 17 17 / 7%);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.card:hover,
+.card:focus-within {
+  border-color: rgb(105 130 112 / 45%);
+  box-shadow: 0 12px 26px rgb(70 17 17 / 12%);
+}
+
+.imageLink {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  flex: 0 0 auto;
+  border-radius: 0.85rem;
+  background: #f5e2e2;
+  text-decoration: none;
+}
+
+.imageLink:focus-visible {
+  outline: 3px solid #698270;
+  outline-offset: 3px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.imagePlaceholder {
+  display: grid;
+  width: 100%;
+  min-height: 12rem;
+  aspect-ratio: 4 / 5;
+  place-items: center;
+  padding: 1rem;
+  color: #526d59;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.details {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  padding: 0.8rem 0.1rem 0.55rem;
+}
+
+.name {
+  display: -webkit-box;
+  overflow: hidden;
+  min-height: 2.7em;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin: 0;
+  color: #461111;
+  font-size: clamp(0.98rem, 1.5vw, 1.15rem);
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.price {
+  margin: 0;
+  color: #461111;
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+  font-weight: 700;
+}
+
+.description {
+  display: -webkit-box;
+  overflow: hidden;
+  min-height: 2.8em;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin: 0.15rem 0 0;
+  color: #52635a;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.actions {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.detailsButton,
+.addButton {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.detailsButton {
+  border: 1px solid #698270;
+  background: #fffdfc;
+  box-shadow: none;
+  color: #36523d !important;
+}
+
+.detailsButton:hover {
+  background: #eaf0eb;
+  box-shadow: none;
+}
+
+.addButton {
+  background: #698270;
+}
+
+.addButton:hover {
+  background: #526d59;
+}
+
+.addButton:focus-visible,
+.detailsButton:focus-visible {
+  outline: 3px solid #461111;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .image {
+    transition: none;
+  }
+}

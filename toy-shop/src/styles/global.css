@@ -1,10 +1,37 @@
+@font-face {
+  font-display: swap;
+  font-family: 'Montserrat Alternates';
+  font-weight: 400;
+  src: url('/homepage/fonts/montserrat-alternates-v18-cyrillic_cyrillic-ext_latin-regular.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Montserrat Alternates';
+  font-weight: 500;
+  src: url('/homepage/fonts/montserrat-alternates-v18-cyrillic_cyrillic-ext_latin-500.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Montserrat Alternates';
+  font-weight: 700;
+  src: url('/homepage/fonts/montserrat-alternates-v18-cyrillic_cyrillic-ext_latin-700.woff2')
+    format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Montserrat Alternates';
+  font-weight: 800;
+  src: url('/homepage/fonts/montserrat-alternates-v18-cyrillic_cyrillic-ext_latin-800.woff2')
+    format('woff2');
+}
+
 :root {
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    sans-serif;
+  font-family: 'Montserrat Alternates', system-ui, sans-serif;
   color: #461111;
   background: #f5e2e2;
   font-synthesis: none;
@@ -18,6 +45,10 @@
   --color-pink: #f3c7c7;
   --color-dark-green: #3d5745;
   --color-text: #461111;
+  --color-green-ink: #36523d;
+  --color-text-muted: #526d59;
+  --color-surface: #fffbf9;
+  --shadow-card: 0 10px 28px rgb(70 17 17 / 7%);
 }
 
 * {

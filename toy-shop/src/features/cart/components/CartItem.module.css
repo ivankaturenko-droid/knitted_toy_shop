@@ -1,0 +1,191 @@
+.item {
+  display: grid;
+  grid-template-columns: 92px minmax(120px, 1fr) auto auto auto;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+  padding: 0.8rem;
+  border: 1px solid rgb(70 17 17 / 8%);
+  border-radius: 16px;
+  background: #a1bda8;
+}
+
+.image,
+.imagePlaceholder {
+  display: grid;
+  width: 92px;
+  height: 92px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f5e2e2;
+  object-fit: cover;
+}
+
+.imagePlaceholder img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.product {
+  min-width: 0;
+}
+
+.name {
+  margin: 0 0 0.35rem;
+  color: #461111;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.unitPrice {
+  margin: 0;
+  color: #36523d;
+  font-size: 0.82rem;
+}
+
+.quantityGroup,
+.lineTotal {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+}
+
+.label {
+  color: #36523d;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.quantityControl {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  border: 1px solid rgb(70 17 17 / 15%);
+  border-radius: 999px;
+  background: #f5e2e2;
+}
+
+.quantityButton {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #461111;
+  font: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.quantityButton:hover:not(:disabled) {
+  background: #f3c7c7;
+}
+
+.quantityButton:disabled {
+  color: #526d59;
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.quantityButton:focus-visible,
+.removeButton:focus-visible {
+  outline: 2px solid #461111;
+  outline-offset: 2px;
+}
+
+.quantity {
+  min-width: 1.35rem;
+  color: #461111;
+  font-weight: 700;
+  text-align: center;
+}
+
+.lineTotal strong {
+  color: #461111;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.removeButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #461111;
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  background: #f3c7c7;
+}
+
+.removeButton svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 920px) {
+  .item {
+    grid-template-columns: 76px minmax(0, 1fr) auto auto;
+  }
+
+  .image,
+  .imagePlaceholder {
+    width: 76px;
+    height: 76px;
+  }
+
+  .removeButton {
+    grid-column: 2 / -1;
+    justify-self: end;
+  }
+}
+
+@media (max-width: 560px) {
+  .item {
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    gap: 0.55rem;
+    padding: 0.65rem;
+  }
+
+  .image,
+  .imagePlaceholder {
+    grid-row: span 2;
+    width: 72px;
+    height: 72px;
+  }
+
+  .product {
+    grid-column: 2 / -1;
+    align-self: end;
+  }
+
+  .quantityGroup {
+    grid-column: 2;
+    justify-items: start;
+  }
+
+  .lineTotal {
+    grid-column: 3;
+    grid-row: 2;
+    justify-items: end;
+  }
+
+  .removeButton {
+    grid-column: 2 / -1;
+    grid-row: 3;
+  }
+
+  .unitPrice {
+    font-size: 0.76rem;
+  }
+}
