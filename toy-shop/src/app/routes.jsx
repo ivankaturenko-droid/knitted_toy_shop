@@ -6,6 +6,7 @@ import Cart from '../pages/Cart/Cart.jsx';
 import Login from '../pages/Login/Login.jsx';
 import Registration from '../pages/Registration/Registration.jsx';
 import Checkout from '../pages/Checkout/Checkout.jsx';
+import NotFound from '../pages/NotFound/NotFound.jsx';
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -21,10 +22,7 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route
-          path="*"
-          element={<p className="notice">Сторінку не знайдено.</p>}
-        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {backgroundLocation && (
         <Routes>
