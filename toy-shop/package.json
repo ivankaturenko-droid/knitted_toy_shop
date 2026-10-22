@@ -1,0 +1,42 @@
+{
+  "name": "toy-shop",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "test": "npm run test:component && npm run test:e2e",
+    "test:component": "cypress run --component --config-file cypress.component.config.js",
+    "test:e2e": "node scripts/run-e2e.mjs",
+    "prepare": "node scripts/prepare-hooks.mjs",
+    "server": "node server/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.6",
+    "express": "^5.2.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.4"
+  },
+  "devDependencies": {
+    "@cypress/vite-dev-server": "^8.0.0",
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "cypress": "^16.1.1",
+    "eslint": "^10.10.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.6",
+    "globals": "^17.12.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.9.9",
+    "vite": "^8.3.0"
+  }
+}
