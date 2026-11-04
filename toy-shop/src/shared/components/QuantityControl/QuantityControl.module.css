@@ -1,0 +1,56 @@
+.group {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+}
+
+.label {
+  color: #36523d;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.control {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  border: 1px solid rgb(70 17 17 / 15%);
+  border-radius: 999px;
+  background: #f5e2e2;
+}
+
+.button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #461111;
+  font: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.button:hover:not(:disabled) {
+  background: #f3c7c7;
+}
+
+.button:disabled {
+  color: #526d59;
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.button:focus-visible {
+  outline: 2px solid #461111;
+  outline-offset: 2px;
+}
+
+.value {
+  min-width: 1.35rem;
+  color: #461111;
+  font-weight: 700;
+  text-align: center;
+}

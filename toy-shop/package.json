@@ -14,7 +14,7 @@
     "test:component": "cypress run --component --config-file cypress.component.config.js",
     "test:e2e": "node scripts/run-e2e.mjs",
     "prepare": "node scripts/prepare-hooks.mjs",
-    "server": "node server/server.js"
+    "server": "json-server db.json --port 3000"
   },
   "dependencies": {
     "cors": "^2.8.6",
@@ -36,6 +36,7 @@
     "eslint-plugin-react-refresh": "^0.5.6",
     "globals": "^17.12.0",
     "husky": "^9.1.7",
+    "json-server": "^1.0.0-beta.15",
     "prettier": "^3.9.9",
     "vite": "^8.3.0"
   }
