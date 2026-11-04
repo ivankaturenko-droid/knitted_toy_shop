@@ -96,7 +96,7 @@
   margin-top: 0.65rem;
 }
 
-.modalContent .quantityLabel {
+.modalContent .quantityGroup {
   margin-top: 0.75rem;
 }
 
@@ -212,23 +212,8 @@
   line-height: 1.65;
 }
 
-.quantityLabel {
-  display: grid;
-  gap: 0.35rem;
+.quantityGroup {
   margin-top: 1rem;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.quantity {
-  width: 5rem;
-  min-height: 2.4rem;
-  padding: 0.3rem 0.55rem;
-  border: 0;
-  border-radius: 0.7rem;
-  background: #e4eee5;
-  color: #461111;
-  font: inherit;
 }
 
 .action {

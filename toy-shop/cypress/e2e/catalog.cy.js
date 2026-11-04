@@ -1,11 +1,14 @@
 describe('Каталог іграшок', () => {
   it('показує товари, перемикає категорії та додає товар у кошик', () => {
     cy.visit('/');
-    cy.contains('h1', 'Маленькі друзі з великою історією').should('be.visible');
-    cy.contains('a', 'Переглянути каталог').click();
+    cy.contains('h1', `В'язанка`).should('be.visible');
+    cy.get('button[aria-label="Закрити вікно авторизації"]').click();
+    cy.get('nav[aria-label="Головна навігація"]')
+      .contains('a', 'Каталог')
+      .click();
     cy.location('pathname').should('eq', '/catalog');
     cy.contains('h1', 'Каталог').should('be.visible');
-    cy.get('article').should('have.length', 9);
+    cy.get('article').should('have.length', 13);
     cy.contains('button', 'Колекції').click();
     cy.contains('Динозавр Геннадій').should('be.visible');
     cy.contains('Зайчик Лілі').should('not.exist');

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ProductList from '../../features/products/components/ProductList.jsx';
 import { useCart } from '../../features/cart/hooks/useCart.js';
-import demoProducts from '../../features/products/data/demoProducts.js';
+import { useFetch } from '../../shared/hooks/useFetch.js';
 import Search from '../../shared/components/Search/Search.jsx';
 import decor from '../../styles/brand-decorations.module.css';
 import styles from './Catalog.module.css';
@@ -22,14 +22,20 @@ export default function Catalog() {
   const [activeCategory, setActiveCategory] = useState(categories[0]);
   const [query, setQuery] = useState('');
   const { addToCart } = useCart();
+  const {
+    data: products = [],
+    loading,
+    error,
+    refetch,
+  } = useFetch('/products');
   const normalizedQuery = query.trim().toLocaleLowerCase('uk');
-  const visibleProducts = getCategoryProducts(
-    demoProducts,
-    activeCategory
-  ).filter((product) =>
-    [product.name, product.description]
-      .filter(Boolean)
-      .some((value) => value.toLocaleLowerCase('uk').includes(normalizedQuery))
+  const visibleProducts = getCategoryProducts(products, activeCategory).filter(
+    (product) =>
+      [product.name, product.description]
+        .filter(Boolean)
+        .some((value) =>
+          value.toLocaleLowerCase('uk').includes(normalizedQuery)
+        )
   );
 
   return (
@@ -55,7 +61,16 @@ export default function Catalog() {
             </button>
           ))}
         </nav>
-        {visibleProducts.length > 0 ? (
+        {loading ? (
+          <p role="status">Завантаження товарів…</p>
+        ) : error ? (
+          <div role="alert">
+            <p>Не вдалося завантажити каталог: {error.message}</p>
+            <button onClick={() => refetch().catch(() => {})} type="button">
+              Спробувати ще раз
+            </button>
+          </div>
+        ) : visibleProducts.length > 0 ? (
           <div className={styles.productDecor}>
             <span
               aria-hidden="true"

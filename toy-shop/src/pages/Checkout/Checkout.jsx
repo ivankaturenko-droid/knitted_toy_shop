@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../../features/cart/hooks/useCart.js';
 import OrderForm from '../../features/orders/components/OrderForm.jsx';
 import OrderSummary from '../../features/orders/components/OrderSummary.jsx';
-import { createOrder } from '../../features/orders/services/orderService.js';
+import { usePost } from '../../shared/hooks/usePost.js';
 
 export default function Checkout() {
   const { items, total, clearCart } = useCart();
   const [orderNumber, setOrderNumber] = useState('');
+  const { post } = usePost();
 
   if (items.length === 0 && !orderNumber) {
     return (
@@ -22,8 +23,10 @@ export default function Checkout() {
   }
 
   async function submitOrder(customer) {
-    const order = await createOrder({
+    const order = await post('/orders', {
       ...customer,
+      total,
+      createdAt: new Date().toISOString(),
       items: items.map(({ id, quantity }) => ({ productId: id, quantity })),
     });
     clearCart();

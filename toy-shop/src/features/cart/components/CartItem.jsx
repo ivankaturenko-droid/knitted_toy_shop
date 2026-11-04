@@ -1,5 +1,6 @@
 import styles from './CartItem.module.css';
 import demoProducts from '../../products/data/demoProducts.js';
+import QuantityControl from '../../../shared/components/QuantityControl/QuantityControl.jsx';
 
 function imageSource(image) {
   if (!image) return null;
@@ -26,31 +27,13 @@ export default function CartItem({ item, onQuantityChange, onRemove }) {
         <h2 className={styles.name}>{item.name}</h2>
         <p className={styles.unitPrice}>{item.price} грн за одиницю</p>
       </div>
-      <div className={styles.quantityGroup}>
-        <span className={styles.label}>Кількість</span>
-        <div className={styles.quantityControl}>
-          <button
-            aria-label={`Зменшити кількість товару «${item.name}»`}
-            className={styles.quantityButton}
-            disabled={item.quantity <= 1}
-            onClick={() => onQuantityChange(item.id, item.quantity - 1)}
-            type="button"
-          >
-            −
-          </button>
-          <span aria-live="polite" className={styles.quantity}>
-            {item.quantity}
-          </span>
-          <button
-            aria-label={`Збільшити кількість товару «${item.name}»`}
-            className={styles.quantityButton}
-            onClick={() => onQuantityChange(item.id, item.quantity + 1)}
-            type="button"
-          >
-            +
-          </button>
-        </div>
-      </div>
+      <QuantityControl
+        className={styles.quantityGroup}
+        decreaseLabel={`Зменшити кількість товару «${item.name}»`}
+        increaseLabel={`Збільшити кількість товару «${item.name}»`}
+        onChange={(quantity) => onQuantityChange(item.id, quantity)}
+        value={item.quantity}
+      />
       <div className={styles.lineTotal}>
         <span className={styles.label}>Вартість</span>
         <strong>{item.price * item.quantity} грн</strong>

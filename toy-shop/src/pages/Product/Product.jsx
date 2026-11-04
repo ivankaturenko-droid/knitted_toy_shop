@@ -1,8 +1,9 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import demoProducts from '../../features/products/data/demoProducts.js';
 import { useCart } from '../../features/cart/hooks/useCart.js';
+import { useFetch } from '../../shared/hooks/useFetch.js';
 import Button from '../../shared/components/Button/Button.jsx';
+import QuantityControl from '../../shared/components/QuantityControl/QuantityControl.jsx';
 import decor from '../../styles/brand-decorations.module.css';
 import styles from './Product.module.css';
 
@@ -12,8 +13,12 @@ export default function Product({ isModal = false }) {
   const { addToCart } = useCart();
   const [added, setAdded] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const product =
-    demoProducts.find((item) => item.id === id) ?? demoProducts[0];
+  const {
+    data: product,
+    loading,
+    error,
+    refetch,
+  } = useFetch(`/products/${encodeURIComponent(id)}`);
 
   useEffect(() => {
     if (!isModal) return undefined;
@@ -28,6 +33,25 @@ export default function Product({ isModal = false }) {
 
   function closeModal(event) {
     if (event.target === event.currentTarget) navigate(-1);
+  }
+
+  if (loading) return <p role="status">Завантаження товару…</p>;
+  if (error || !product) {
+    return (
+      <section className={decor.pageDecor}>
+        <p role="alert">
+          {error
+            ? `Не вдалося завантажити товар: ${error.message}`
+            : 'Товар не знайдено.'}
+        </p>
+        {error && (
+          <button onClick={() => refetch().catch(() => {})} type="button">
+            Спробувати ще раз
+          </button>
+        )}
+        <Link to="/catalog">Повернутися до каталогу</Link>
+      </section>
+    );
   }
 
   const productContent = (
@@ -65,18 +89,13 @@ export default function Product({ isModal = false }) {
         <h2 className={styles.sectionTitle}>Характеристики</h2>
         <p className={styles.meta}>Розмір: 18 см</p>
         <p className={styles.meta}>Матеріал: плюшева пряжа</p>
-        <label className={styles.quantityLabel}>
-          Кількість
-          <input
-            className={styles.quantity}
-            onChange={(event) =>
-              setQuantity(Math.max(1, Number(event.target.value) || 1))
-            }
-            value={quantity}
-            min="1"
-            type="number"
-          />
-        </label>
+        <QuantityControl
+          className={styles.quantityGroup}
+          decreaseLabel={`Зменшити кількість товару «${product.name}»`}
+          increaseLabel={`Збільшити кількість товару «${product.name}»`}
+          onChange={setQuantity}
+          value={quantity}
+        />
         <Button
           className={styles.action}
           onClick={() => {
