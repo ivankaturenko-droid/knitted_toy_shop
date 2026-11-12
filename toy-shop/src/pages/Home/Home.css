@@ -182,49 +182,49 @@ html {
     text-shadow: 0 3px 20px rgb(0 0 0 / 28%);
   }
 
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    clip-path: inset(50%);
-  }
-
-  .search_form_toy {
-    display: flex;
-    justify-content: center;
-  }
-
-  .input-form {
-    width: min(800px, 90vw);
-    min-height: 3.4rem;
+  .home-search {
     margin-top: clamp(1.25rem, 4vw, 2.5rem);
-    padding: 0.8rem clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  .home-search-results {
+    width: min(800px, 90vw);
+    max-height: min(50vh, 360px);
+    overflow-y: auto;
+    margin: 0.75rem auto 0;
+    padding: 1rem 1.25rem;
     border: 1px solid rgb(243 199 199 / 80%);
-    border-radius: 999px;
-    outline: 0;
+    border-radius: 20px;
     background: #f9eeee;
     box-shadow: 0 12px 32px rgb(0 0 0 / 16%);
     color: #461111;
-    font:
-      700 clamp(1rem, 2vw, 1.2rem) 'Montserrat Alternates',
-      sans-serif;
-    transition:
-      border-color 160ms ease,
-      box-shadow 160ms ease;
+    font-size: 1rem;
   }
 
-  .input-form::placeholder {
-    color: #634747;
-    opacity: 1;
+  .home-search-results ul {
+    display: grid;
+    gap: 0.5rem;
   }
 
-  .input-form:focus-visible {
-    border-color: #698270;
-    outline: 3px solid rgb(211 227 214 / 65%);
-    outline-offset: 2px;
+  .home-search-results a {
+    color: #526d59;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .home-search-results a:hover {
+    color: #461111;
+  }
+
+  .home-search-clear {
+    margin-bottom: 0.5rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #526d59;
+    cursor: pointer;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
   }
 
   .about_me-section {

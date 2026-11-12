@@ -3,6 +3,8 @@ import styles from './Search.module.css';
 export default function Search({
   label = 'Що вас цікавить?',
   className = '',
+  id,
+  name,
   onChange,
   placeholder = 'Що вас цікавить?',
   value,
@@ -12,6 +14,8 @@ export default function Search({
       <span className={styles.visuallyHidden}>{label}</span>
       <input
         className={styles.input}
+        id={id}
+        name={name}
         onChange={onChange}
         placeholder={placeholder}
         type="search"

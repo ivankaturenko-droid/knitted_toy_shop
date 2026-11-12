@@ -1,4 +1,39 @@
 describe('Каталог іграшок', () => {
+  it('використовує однакове стилізування пошуку на головній і в каталозі', () => {
+    let homeSearchStyles;
+    const properties = [
+      'width',
+      'min-height',
+      'padding',
+      'border',
+      'border-radius',
+      'background-color',
+      'box-shadow',
+      'color',
+      'font-family',
+      'font-size',
+      'font-weight',
+    ];
+
+    cy.visit('/');
+    cy.get('button[aria-label="Закрити вікно авторизації"]').click();
+    cy.get('#search_toy').then(($input) => {
+      const style = window.getComputedStyle($input[0]);
+      homeSearchStyles = properties.map((property) =>
+        style.getPropertyValue(property)
+      );
+    });
+
+    cy.visit('/catalog');
+    cy.get('input[type="search"]').then(($input) => {
+      const style = window.getComputedStyle($input[0]);
+      const catalogSearchStyles = properties.map((property) =>
+        style.getPropertyValue(property)
+      );
+      cy.wrap(catalogSearchStyles).should('deep.equal', homeSearchStyles);
+    });
+  });
+
   it('показує товари, перемикає категорії та додає товар у кошик', () => {
     cy.visit('/');
     cy.contains('h1', `В'язанка`).should('be.visible');

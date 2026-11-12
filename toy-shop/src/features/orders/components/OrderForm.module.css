@@ -1,0 +1,138 @@
+.formSection {
+  display: grid;
+  min-width: 0;
+  gap: 0.85rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(105 130 112 / 26%);
+}
+
+.formSection h3 {
+  margin: 0;
+  color: #36523d;
+  font-size: 1rem;
+}
+
+.contactFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.inputField {
+  display: grid;
+  min-width: 0;
+  gap: 0.35rem;
+}
+
+.fieldError {
+  color: #9b3030;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.choiceGroup {
+  display: grid;
+  min-width: 0;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.choiceGroup legend {
+  margin-bottom: 0.2rem;
+  padding: 0;
+  color: #461111;
+  font-weight: 800;
+}
+
+.choiceOptions {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.choiceOption {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 0.65rem;
+  padding: 0.85rem;
+  border: 1px solid rgb(105 130 112 / 30%);
+  border-radius: 0.95rem;
+  background: #fffaf8;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.choiceOptionSelected {
+  border-color: #698270;
+  background: rgb(161 189 168 / 16%);
+  box-shadow: 0 0 0 2px rgb(105 130 112 / 12%);
+}
+
+.choiceOption input {
+  width: 1.1rem;
+  min-height: 1.1rem;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  accent-color: #698270;
+}
+
+.choiceContent {
+  display: grid;
+  min-width: 0;
+  gap: 0.2rem;
+}
+
+.choiceContent strong {
+  color: #36523d;
+  font-size: 0.92rem;
+}
+
+.choiceContent small {
+  color: #526d59;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.savedAddress {
+  margin-bottom: 0.1rem;
+}
+
+.commentField textarea {
+  width: 100%;
+  min-height: 6rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgb(105 130 112 / 48%);
+  border-radius: 0.9rem;
+  background: #fffaf8;
+  color: #461111;
+  font: inherit;
+  resize: vertical;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.commentField textarea:focus-visible {
+  border-color: #698270;
+  outline: 3px solid rgb(105 130 112 / 24%);
+  outline-offset: 1px;
+  background: #fffdfc;
+}
+
+.commentField textarea::placeholder {
+  color: #806f70;
+  opacity: 1;
+}
+
+@media (max-width: 520px) {
+  .contactFields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

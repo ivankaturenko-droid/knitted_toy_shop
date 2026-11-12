@@ -8,9 +8,24 @@ import {
 } from 'react';
 import { useFetch } from '../../../shared/hooks/useFetch.js';
 import { usePost } from '../../../shared/hooks/usePost.js';
-import { clearAuth, getSavedAuth, saveAuth } from '../services/authService.js';
+import {
+  clearAuth,
+  getSavedAuth,
+  hashPassword,
+  migrateLegacyUser,
+  saveAuth,
+} from '../services/authService.js';
 
 const AuthContext = createContext(null);
+
+function withoutCredentials(user) {
+  return Object.fromEntries(
+    Object.entries(user).filter(
+      ([key]) =>
+        !['password', 'passwordHash', 'passwordSalt', 'salt'].includes(key)
+    )
+  );
+}
 
 export function AuthProvider({ children }) {
   const [auth, setAuth] = useState(getSavedAuth);
@@ -19,18 +34,39 @@ export function AuthProvider({ children }) {
 
   const signIn = useCallback(
     async (credentials) => {
+      const email = credentials.email.trim().toLowerCase();
       const users = await fetchUsers(
-        `/users?email=${encodeURIComponent(credentials.email.trim().toLowerCase())}`
+        `/users?email=${encodeURIComponent(email)}`
       );
-      const user = users.find(
-        (entry) => entry.password === credentials.password
+      const foundUser = users.find(
+        (entry) => entry.email?.trim().toLowerCase() === email
       );
-      if (!user) throw new Error('Електронна пошта або пароль неправильні.');
+      if (!foundUser) {
+        throw new Error('Електронна пошта або пароль неправильні.');
+      }
+
+      let authenticatedUser = foundUser;
+      if (authenticatedUser.passwordHash && authenticatedUser.passwordSalt) {
+        const { passwordHash } = await hashPassword(
+          credentials.password,
+          authenticatedUser.passwordSalt
+        );
+        if (passwordHash !== authenticatedUser.passwordHash) {
+          throw new Error('Електронна пошта або пароль неправильні.');
+        }
+      } else if (authenticatedUser.password === credentials.password) {
+        authenticatedUser = await migrateLegacyUser(
+          authenticatedUser,
+          credentials.password
+        );
+      } else {
+        throw new Error('Електронна пошта або пароль неправильні.');
+      }
 
       const token = crypto.randomUUID();
       const result = {
         token,
-        user: { id: user.id, name: user.name, email: user.email },
+        user: withoutCredentials(authenticatedUser),
       };
       saveAuth(result);
       setAuth(result);
@@ -40,21 +76,30 @@ export function AuthProvider({ children }) {
 
   const signUp = useCallback(
     async (details) => {
-      const email = details.email.trim().toLowerCase();
+      const name = details.name?.trim();
+      const email = details.email?.trim().toLowerCase();
+      const password = details.password;
+      if (!name || !email || !password)
+        throw new Error('Заповніть усі обов’язкові поля.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+        throw new Error('Введіть коректну електронну адресу.');
       const existingUsers = await fetchUsers(
         `/users?email=${encodeURIComponent(email)}`
       );
-      if (existingUsers.length)
+      if (
+        existingUsers.some((user) => user.email?.trim().toLowerCase() === email)
+      )
         throw new Error('Користувач із такою поштою вже існує.');
 
-      const createdUser = await post('/users', { ...details, email });
+      const passwordCredentials = await hashPassword(password);
+      const createdUser = await post('/users', {
+        name,
+        email,
+        ...passwordCredentials,
+      });
       const result = {
         token: crypto.randomUUID(),
-        user: {
-          id: createdUser.id,
-          name: createdUser.name,
-          email: createdUser.email,
-        },
+        user: withoutCredentials(createdUser),
       };
       saveAuth(result);
       setAuth(result);
@@ -67,14 +112,24 @@ export function AuthProvider({ children }) {
     setAuth({ token: null, user: null });
   }, []);
 
+  const updateUser = useCallback(
+    (user) => {
+      const result = { ...auth, user };
+      saveAuth(result);
+      setAuth(result);
+    },
+    [auth]
+  );
+
   const value = useMemo(
     () => ({
       ...auth,
       signIn,
       signUp,
       logout,
+      updateUser,
     }),
-    [auth, signIn, signUp, logout]
+    [auth, signIn, signUp, logout, updateUser]
   );
 
   return createElement(AuthContext.Provider, { value }, children);

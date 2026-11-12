@@ -1,0 +1,158 @@
+.decor {
+  min-height: 100%;
+}
+
+.page {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 1.25rem;
+  width: min(100% - 2rem, 1100px);
+  margin: 0 auto;
+}
+
+.page > :global(.page-heading) {
+  margin-bottom: 0;
+}
+
+.checkoutLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.85fr);
+  align-items: start;
+  gap: 1.25rem;
+}
+
+.page :global(.panel),
+.page :global(.form-card) {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: 1.6rem;
+  box-shadow: 0 14px 32px rgb(70 17 17 / 11%);
+}
+
+.page :global(.panel) {
+  border-color: rgb(105 130 112 / 38%);
+  background: linear-gradient(140deg, #fffdfb, #f1f6f2);
+}
+
+.page :global(.form-card) {
+  width: 100%;
+  min-width: 0;
+  border-color: rgb(243 199 199 / 90%);
+  background: linear-gradient(140deg, #fffdfb, #fff1ef);
+}
+
+.page :global(.panel) h2,
+.page :global(.form-card) h2 {
+  margin: 0;
+  color: #461111;
+}
+
+.page :global(.form-card) input:not([type='radio']),
+.page :global(.form-card) select {
+  width: 100%;
+  min-height: 2.9rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgb(105 130 112 / 48%);
+  border-radius: 0.9rem;
+  background: #fffaf8;
+  box-shadow: inset 0 1px 3px rgb(70 17 17 / 5%);
+  color: #461111;
+  font: inherit;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.page :global(.form-card) input:not([type='radio']):hover:not(:focus-visible),
+.page :global(.form-card) select:hover:not(:focus-visible) {
+  border-color: #b98489;
+}
+
+.page :global(.form-card) input:not([type='radio']):focus-visible,
+.page :global(.form-card) select:focus-visible {
+  border-color: #698270;
+  outline: 3px solid rgb(105 130 112 / 24%);
+  outline-offset: 1px;
+  background: #fffdfc;
+  box-shadow: 0 0 0 1px rgb(105 130 112 / 18%);
+}
+
+.page :global(.form-card) input:not([type='radio'])::placeholder {
+  color: #806f70;
+  opacity: 1;
+}
+
+.page :global(.panel) h2 {
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgb(105 130 112 / 26%);
+}
+
+.successCard {
+  display: grid;
+  gap: 0.8rem;
+  border-color: rgb(105 130 112 / 38%);
+  background: linear-gradient(140deg, #fffdfb, #f1f6f2);
+}
+
+.successCard > p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.successMessage {
+  color: #36523d;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.successActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.successActions :global(.button) {
+  text-align: center;
+}
+
+.berry {
+  position: absolute;
+  z-index: 1;
+  width: clamp(72px, 8vw, 112px);
+  aspect-ratio: 1;
+  background: url('/homepage/images/полуниця%201.png') center / contain
+    no-repeat;
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+.berryLeft {
+  top: 9%;
+  left: max(0.5rem, calc(50% - 680px));
+  transform: rotate(-18deg);
+}
+
+.berryRight {
+  right: max(0.5rem, calc(50% - 680px));
+  bottom: 8%;
+  transform: rotate(16deg);
+}
+
+@media (max-width: 760px) {
+  .checkoutLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .berry {
+    width: 58px;
+    opacity: 0.38;
+  }
+}
+
+@media (max-width: 520px) {
+  .berry {
+    width: 44px;
+    opacity: 0.25;
+  }
+}

@@ -1,0 +1,151 @@
+.summary {
+  display: grid;
+  min-width: 0;
+  gap: 1rem;
+}
+
+.items {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem;
+  border: 1px solid rgb(105 130 112 / 20%);
+  border-radius: 1rem;
+  background: rgb(161 189 168 / 12%);
+}
+
+.image,
+.imageFallback {
+  display: grid;
+  width: 4.25rem;
+  height: 4.25rem;
+  place-items: center;
+  border-radius: 0.75rem;
+  background: #fffdfb;
+  object-fit: cover;
+}
+
+.imageFallback {
+  font-size: 1.8rem;
+}
+
+.itemDetails {
+  display: grid;
+  min-width: 0;
+  gap: 0.25rem;
+}
+
+.itemDetails strong {
+  overflow-wrap: anywhere;
+  color: #36523d;
+}
+
+.itemDetails small {
+  color: #526d59;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.itemDetails .unavailable {
+  color: #9b3030;
+}
+
+.lineTotal {
+  color: #461111;
+  font-size: 0.9rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.error {
+  display: grid;
+  justify-items: start;
+  gap: 0.6rem;
+  margin: 0;
+  color: #9b3030;
+  font-weight: 600;
+}
+
+.error p {
+  margin: 0;
+}
+
+.retryButton {
+  padding: 0.55rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+.cartLink {
+  color: #36523d;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.totals {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgb(105 130 112 / 26%);
+}
+
+.totals > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.totals dt {
+  color: #526d59;
+}
+
+.totals dd {
+  margin: 0;
+  color: #36523d;
+  font-weight: 700;
+  text-align: right;
+}
+
+.grandTotal {
+  padding-top: 0.7rem;
+  border-top: 1px dashed rgb(105 130 112 / 40%);
+}
+
+.grandTotal dt,
+.grandTotal dd {
+  color: #461111;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.deliveryNote {
+  margin: -0.5rem 0 0;
+  color: #68595a;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 520px) {
+  .item {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+  }
+
+  .image,
+  .imageFallback {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .lineTotal {
+    grid-column: 2;
+    text-align: left;
+  }
+}

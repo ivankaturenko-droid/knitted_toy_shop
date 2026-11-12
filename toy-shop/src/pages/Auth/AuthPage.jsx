@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../features/auth/hooks/useAuth.js';
 import decor from '../../styles/brand-decorations.module.css';
 import Button from '../../shared/components/Button/Button.jsx';
@@ -8,10 +8,19 @@ import styles from './AuthPage.module.css';
 
 export default function AuthPage({ mode, isModal = false, onClose }) {
   const isRegistration = mode === 'registration';
+  const location = useLocation();
   const navigate = useNavigate();
   const { signIn, signUp } = useAuth();
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const submissionInProgress = useRef(false);
+  const requestedReturnTo = new URLSearchParams(location.search).get(
+    'returnTo'
+  );
+  const safeReturnTo =
+    requestedReturnTo?.startsWith('/') && !requestedReturnTo.startsWith('//')
+      ? requestedReturnTo
+      : null;
 
   useEffect(() => {
     if (!isModal) return undefined;
@@ -26,6 +35,7 @@ export default function AuthPage({ mode, isModal = false, onClose }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    if (submissionInProgress.current) return;
     setError('');
 
     const form = event.currentTarget;
@@ -42,6 +52,7 @@ export default function AuthPage({ mode, isModal = false, onClose }) {
       return;
     }
 
+    submissionInProgress.current = true;
     setIsSubmitting(true);
     try {
       if (isRegistration) {
@@ -50,12 +61,13 @@ export default function AuthPage({ mode, isModal = false, onClose }) {
         await signIn({ email, password });
       }
       onClose?.();
-      navigate('/');
+      navigate(safeReturnTo || '/');
     } catch (submitError) {
       setError(
         submitError.message || 'Не вдалося виконати запит. Спробуйте ще раз.'
       );
     } finally {
+      submissionInProgress.current = false;
       setIsSubmitting(false);
     }
   }
@@ -151,7 +163,15 @@ export default function AuthPage({ mode, isModal = false, onClose }) {
           </Button>
           <p className={styles.switchMode}>
             {isRegistration ? 'Вже маєте акаунт?' : 'Ще не маєте акаунта?'}{' '}
-            <Link to={isRegistration ? '/login' : '/register'}>
+            <Link
+              to={
+                safeReturnTo
+                  ? `${isRegistration ? '/login' : '/register'}?returnTo=${encodeURIComponent(safeReturnTo)}`
+                  : isRegistration
+                    ? '/login'
+                    : '/register'
+              }
+            >
               {isRegistration ? 'Увійти' : 'Зареєструватися'}
             </Link>
           </p>

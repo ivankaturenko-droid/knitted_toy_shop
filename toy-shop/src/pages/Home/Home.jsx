@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProductCard from '../../features/products/components/ProductCard.jsx';
+import Search from '../../shared/components/Search/Search.jsx';
+import { useFetch } from '../../shared/hooks/useFetch.js';
 import './Home.css';
 
 const featuredProducts = [
@@ -62,6 +65,13 @@ function ArrowIcon({ direction }) {
 }
 
 export default function Home() {
+  const [query, setQuery] = useState('');
+  const {
+    data: products = [],
+    loading,
+    error,
+    refetch,
+  } = useFetch('/products');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(() =>
     window.innerWidth <= 640 ? 1 : 2
@@ -89,6 +99,14 @@ export default function Home() {
     (_, offset) =>
       featuredProducts[(currentIndex + offset) % featuredProducts.length]
   );
+  const normalizedQuery = query.trim().toLocaleLowerCase('uk');
+  const searchResults = useMemo(
+    () =>
+      products.filter((product) =>
+        product.name?.toLocaleLowerCase('uk').includes(normalizedQuery)
+      ),
+    [normalizedQuery, products]
+  );
 
   return (
     <div className="home-page">
@@ -99,19 +117,56 @@ export default function Home() {
             className="search_form"
             onSubmit={(event) => event.preventDefault()}
           >
-            <label className="label-form visually-hidden" htmlFor="search_toy">
-              Що вас цікавить?
-            </label>
-            <div className="search_form_toy">
-              <input
-                className="input-form"
-                id="search_toy"
-                name="search_toy"
-                placeholder="Що вас цікавить?"
-                type="search"
-              />
-            </div>
+            <Search
+              className="home-search"
+              id="search_toy"
+              label="Що вас цікавить?"
+              name="search_toy"
+              onChange={(event) => setQuery(event.target.value)}
+              value={query}
+            />
           </form>
+          {normalizedQuery && (
+            <div
+              aria-label="Результати пошуку товарів"
+              aria-live="polite"
+              className="home-search-results"
+              role="region"
+            >
+              <button
+                className="home-search-clear"
+                onClick={() => setQuery('')}
+                type="button"
+              >
+                Очистити пошук
+              </button>
+              {loading ? (
+                <p role="status">Завантаження товарів…</p>
+              ) : error ? (
+                <div role="alert">
+                  <p>Не вдалося завантажити товари: {error.message}</p>
+                  <button
+                    onClick={() => refetch().catch(() => {})}
+                    type="button"
+                  >
+                    Спробувати ще раз
+                  </button>
+                </div>
+              ) : searchResults.length > 0 ? (
+                <ul>
+                  {searchResults.map((product) => (
+                    <li key={product.id}>
+                      <Link to={`/product/${encodeURIComponent(product.id)}`}>
+                        {product.name} · {product.price} грн
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>За вашим запитом товарів не знайдено.</p>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
