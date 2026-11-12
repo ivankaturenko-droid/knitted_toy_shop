@@ -1,7 +1,11 @@
 .page {
+  position: relative;
+  z-index: 2;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
+  font-family: 'Montserrat Alternates', system-ui, sans-serif;
+  font-weight: 700;
 }
 
 .header {
@@ -20,6 +24,37 @@
   margin: 0.35rem 0 0;
   color: #526d59;
   font-size: 0.95rem;
+}
+
+.clearButton {
+  margin-top: 0.75rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid rgb(185 132 137 / 55%);
+  border-radius: 999px;
+  background: #f5e2e2;
+  color: #461111;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgb(70 17 17 / 8%);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.clearButton:hover {
+  transform: translateY(-1px);
+  border-color: #b98489;
+  background: #f3c7c7;
+  box-shadow: 0 6px 16px rgb(70 17 17 / 12%);
+}
+
+.clearButton:focus-visible {
+  outline: 2px solid #461111;
+  outline-offset: 3px;
 }
 
 .content {
@@ -46,7 +81,7 @@
   display: inline-block;
   margin-top: 1.1rem;
   color: #36523d;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 700;
   text-decoration: none;
   text-underline-offset: 0.2em;

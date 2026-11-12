@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Knitted toy shop database",
+  "type": "object",
+  "properties": {
+    "$schema": { "type": "string" },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "price": { "type": "number", "minimum": 0 },
+          "description": { "type": "string" },
+          "image": { "type": ["string", "null"] },
+          "categories": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["id", "name", "price", "description", "categories"]
+      }
+    },
+    "users": { "type": "array", "items": { "type": "object" } },
+    "orders": { "type": "array", "items": { "type": "object" } }
+  },
+  "required": ["products", "users", "orders"],
+  "additionalProperties": {
+    "oneOf": [{ "type": "array" }, { "type": "object" }]
+  }
+}

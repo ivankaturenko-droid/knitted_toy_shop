@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from '../features/auth/hooks/useAuth.js';
 import { CartProvider, useCart } from '../features/cart/hooks/useCart.js';
+import { AccountDataProvider } from '../features/account/AccountDataContext.jsx';
 import Footer from '../shared/components/Footer/Footer.jsx';
 import Header from '../shared/components/Header/Header.jsx';
 import AuthPage from '../pages/Auth/AuthPage.jsx';
@@ -49,12 +50,7 @@ function AppContent() {
 
   return (
     <div className={`app-shell${isHome ? ' app-shell--home' : ''}`}>
-      <Header
-        cartCount={cart.itemCount}
-        user={auth.user}
-        onLogout={auth.logout}
-        isHome={isHome}
-      />
+      <Header cartCount={cart.itemCount} user={auth.user} isHome={isHome} />
       <main
         className={isHome ? 'page-content page-content--home' : 'page-content'}
       >
@@ -92,9 +88,11 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <CartProvider>
-          <AppContent />
-        </CartProvider>
+        <AccountDataProvider>
+          <CartProvider>
+            <AppContent />
+          </CartProvider>
+        </AccountDataProvider>
       </AuthProvider>
     </BrowserRouter>
   );

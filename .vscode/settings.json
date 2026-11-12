@@ -1,0 +1,8 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["/toy-shop/db.json"],
+      "url": "./toy-shop/db.schema.json"
+    }
+  ]
+}

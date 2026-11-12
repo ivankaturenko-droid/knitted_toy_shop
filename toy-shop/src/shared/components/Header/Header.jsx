@@ -17,15 +17,8 @@ function BasketIcon() {
   );
 }
 
-export default function Header({ cartCount, isHome }) {
+export default function Header({ cartCount, isHome, user }) {
   const { pathname } = useLocation();
-  const headerClass = isHome ? 'header home-header' : `header ${styles.header}`;
-  const containerClass = isHome ? 'container' : styles.container;
-  const headerRowClass = isHome ? 'header-container' : styles.headerContainer;
-  const navClass = isHome ? 'header-nav' : styles.nav;
-  const listClass = isHome ? 'header-list' : styles.list;
-  const logoClass = isHome ? 'home-logo' : styles.logo;
-  const cartClass = isHome ? 'shopping_cart' : styles.cart;
 
   function navLinkClass(path) {
     const routeClass = isHome
@@ -35,18 +28,43 @@ export default function Header({ cartCount, isHome }) {
   }
 
   return (
-    <header className={headerClass}>
-      <div className={containerClass}>
-        <div className={headerRowClass}>
-          <nav aria-label="Головна навігація" className={navClass}>
+    <header
+      className={isHome ? 'header home-header' : `header ${styles.header}`}
+    >
+      <div className={isHome ? 'container' : styles.container}>
+        <div className={isHome ? 'header-container' : styles.headerContainer}>
+          <nav
+            aria-label="Головна навігація"
+            className={isHome ? 'header-nav' : styles.nav}
+          >
             <Link aria-label="В’язані іграшки — головна" to="/">
               <img
                 alt="В’язані іграшки"
-                className={logoClass}
+                className={isHome ? 'home-logo' : styles.logo}
                 src="/homepage/images/yarn%201.svg"
               />
             </Link>
-            <ul className={listClass}>
+            <ul className={isHome ? 'header-list' : styles.list}>
+              {user ? (
+                <li>
+                  <Link className={navLinkClass('/account')} to="/account">
+                    Кабінет
+                  </Link>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Link className={navLinkClass('/register')} to="/register">
+                      Реєстрація
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className={navLinkClass('/login')} to="/login">
+                      Увійти
+                    </Link>
+                  </li>
+                </>
+              )}
               <li>
                 <HomeSectionLink
                   className={navLinkClass('/')}
@@ -58,16 +76,6 @@ export default function Header({ cartCount, isHome }) {
               <li>
                 <Link className={navLinkClass('/catalog')} to="/catalog">
                   Каталог
-                </Link>
-              </li>
-              <li>
-                <Link className={navLinkClass('/register')} to="/register">
-                  Реєстрація
-                </Link>
-              </li>
-              <li>
-                <Link className={navLinkClass('/login')} to="/login">
-                  Увійти
                 </Link>
               </li>
               <li>
@@ -90,7 +98,7 @@ export default function Header({ cartCount, isHome }) {
           </nav>
           <Link
             aria-label={`Кошик, товарів: ${cartCount}`}
-            className={cartClass}
+            className={isHome ? 'shopping_cart' : styles.cart}
             to="/cart"
           >
             <BasketIcon />
